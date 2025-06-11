@@ -9,6 +9,7 @@ public class Employee implements Serializable {
     private Position position;
     private double salary;
 
+
     public Employee(String id, String name, Position position, double salary) {
         if (id == null || id.isEmpty()) {
             throw new IllegalArgumentException("ID no puede estar vacío.");
@@ -19,7 +20,11 @@ public class Employee implements Serializable {
         if (position == null) {
             throw new IllegalArgumentException("La posición no puede ser nula.");
         }
-        if (salary < position.getMinSalary()) {
+
+
+        if (salary >= position.getMinSalary() * 0.9 && salary < position.getMinSalary()) {
+            salary = position.getMinSalary();
+        } else if (salary < position.getMinSalary()) {
             throw new IllegalArgumentException("El salario no puede estar por debajo del mínimo permitido para la posición.");
         }
 
@@ -28,6 +33,7 @@ public class Employee implements Serializable {
         this.position = position;
         this.salary = salary;
     }
+
 
     public String getId() { return id; }
     public String getName() { return name; }

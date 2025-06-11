@@ -42,6 +42,15 @@ public class EmployeeManagerTest {
         assertTrue(employeeManager.getEmployees().contains(employee2));
     }
 
+    @Test
+    void testEmployeeSalaryAutoAdjustment() {
+        Position seniorDeveloper = new Position("2", "Senior Developer", 60000, 90000);
+        Employee employee = new Employee("E005", "Charlie Brown", seniorDeveloper, 55000); // 10% inferior al mínimo
+
+        assertEquals(seniorDeveloper.getMinSalary(), employee.getSalary()); // Se ajusta al mínimo automáticamente
+    }
+
+
 
     @Test
     public void testRemoveEmployee() {
@@ -59,6 +68,7 @@ public class EmployeeManagerTest {
 
         assertTrue(true);
     }
+
 
     @Test
     public void testCalculateTotalSalary() {
@@ -116,7 +126,7 @@ public class EmployeeManagerTest {
         employeeManager.updateEmployeePosition(employee2, midLevel);
 
         assertEquals(midLevel, employee2.getPosition());
-        assertEquals(midLevel.getMinSalary(), employee2.getSalary()); // Ajuste automático
+        assertEquals(midLevel.getMinSalary(), employee2.getSalary());
     }
 
 
